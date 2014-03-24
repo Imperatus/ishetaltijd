@@ -1,5 +1,10 @@
 class TimerController < ApplicationController
-  def snack
+  def new
+
+  end
+
+
+  def index
     responses = ['Voor je kijken, doorcoden!!!', 'We zijn nog slimme applicaties aan het bouwen...', 'Writersblock...']
     @now       = Time.new
 

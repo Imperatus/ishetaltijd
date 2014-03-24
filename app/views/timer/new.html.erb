@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="small-12 columns">
+    <div class="off-canvas-wrap">
+      <div class="inner-wrap">
+
+        <nav class="tab-bar">
+          <section class="left-small">
+            <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+          </section>
+          <section class="right tab-bar-section">
+            <h1>Nieuwe timer!</h1>
+          </section>
+        </nav>
+
+        <aside class="left-off-canvas-menu"> <!-- whatever you want goes here -->
+          <ul class="off-canvas-list">
+            <li><label>Tijden</label></li>
+            <li><a href="#">Snacktijd</a></li>
+            <li><a href="#">Biertijd</a></li>
+          </ul>
+        </aside>
+
+        <section class="main-section">
+          <div class="row">
+            <div class="small-12 columns">
+              <p>
+                <%= form_for :timer do |f| %>
+                  <p>
+                    <%= f.label :type %><br>
+                    <%= f.text_field :type %>
+                  </p>
+
+                  <p>
+                    <%= f.label :time %><br>
+                    <%= f.time_select :time %>
+                  </p>
+
+                  <p>
+                    <%= f.submit %>
+                  </p>
+              <% end %>
+              </p>
+              <a class="exit-off-canvas"></a>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
