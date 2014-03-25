@@ -26,8 +26,23 @@
               <% if @time %>
                   <p>Jaaaaaaaaaaaaaaaaaaa</p>
               <% else %>
-                  <p>Nog niet... We moeten nog <%=@difference["hours"] %>:<%=@difference["minutes"] %>:<%=@difference["seconds"] %> wachten</p>
-                  <p><%= @answer %></p> <!-- close the off-canvas menu -->
+                  <h2>Nog niet...</h2>
+
+                  <div id="fancyClock" class="small-centered small-8 columns clearfix">
+
+                  </div>
+
+                  <h2><%= @answer %></h2> <!-- close the off-canvas menu -->
+
+                  <script type="text/javascript">
+                      $(document).ready(function(){
+                          $('#fancyClock').tzineClock({
+                              hours: <%=@difference["hours"] %>,
+                              minutes: <%=@difference["minutes"] %>,
+                              seconds: <%=@difference["seconds"] %>
+                          });
+                      });
+                  </script>
               <% end %>
               <a class="exit-off-canvas"></a>
             </div>
