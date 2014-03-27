@@ -6,24 +6,25 @@ class TimerController < ApplicationController
 
   def index
     responses = ['Voor je kijken, doorcoden!!!', 'We zijn nog slimme applicaties aan het bouwen...', 'Writersblock...']
-    @now       = Time.new
+    time_check = Chronic.parse('today 4pm')
+    @now      = Time.new
 
-    if @now.hour >= 12
-      twelve = Chronic.parse('tomorrow noon')
-    else
-      twelve = Chronic.parse('noon')
+
+    if @now.hour >= time_check.hour
+      time_check = Chronic.parse('tomorrow 4pm')
     end
 
     @time   = false
 
-    if @now.hour.between?(12,13)
+    if @now.hour.between?(time_check.hour, time_check.hour + 1)
       @answer = 'JAAAAAAAAAAAAAAAAA'
+      @time   = true
     else
-      @answer                = responses.sample
+      @answer = responses.sample
     end
     @difference            = Hash.new
-    @difference["hours"]   = sprintf '%02i', (((@now - twelve).abs) / 3600).to_i
-    @difference["minutes"] = sprintf '%02i', ((((@now - twelve).abs) / 60) - (@difference["hours"].to_i * 60)).to_i
-    @difference["seconds"] = sprintf '%02i', ((((@now - twelve).abs)) - (@difference["hours"].to_i * 3600) - (@difference["minutes"].to_i * 60)).to_i
+    @difference["hours"]   = sprintf '%02i', (((@now - time_check).abs) / 3600).to_i
+    @difference["minutes"] = sprintf '%02i', ((((@now - time_check).abs) / 60) - (@difference["hours"].to_i * 60)).to_i
+    @difference["seconds"] = sprintf '%02i', ((((@now - time_check).abs)) - (@difference["hours"].to_i * 3600) - (@difference["minutes"].to_i * 60)).to_i
   end
 end

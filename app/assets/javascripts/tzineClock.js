@@ -110,7 +110,7 @@
 		}
 		
 		// Setting up a interval, executed every 1000 milliseconds:
-		setInterval(function(){
+		var timedInterval = setInterval(function(){
 			var h = timerVars['hours'];
 			var m = timerVars['minutes'];
 			var s = timerVars['seconds'];
@@ -123,7 +123,12 @@
                 timerVars['seconds'] = 59;
 
                 if (m === 0) {
-                    timerVars['hours']--;
+                    if (h !== 0) {
+                        timerVars['hours']--;
+                    } else {
+                        // Stop the timer!
+                        clearInterval(timedInterval);
+                    }
                     timerVars['minutes'] = 59;
                 } else {
                     timerVars['minutes']--;
@@ -131,7 +136,7 @@
             } else {
                 timerVars['seconds']--;
             }
-		
+
 		},1000);
 	}
 	
@@ -151,13 +156,12 @@
             rotateElement(clock.rotateLeft,0);
         }
 
-		if(angle>=180)
+		if(angle<=180)
 		{
-			// The left part is rotated, and the right is currently hidden:
+            clock.rotateRight.hide();
+            // The left part is rotated, and the right is currently hidden:
 			element = clock.rotateLeft;
-		}
-		else
-		{
+		} else {
 			// The first part of the rotation has completed, so we start rotating the right part:
 			clock.rotateRight.show();
 			clock.rotateLeft.show();
