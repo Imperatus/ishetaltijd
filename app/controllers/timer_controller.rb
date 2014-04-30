@@ -6,12 +6,12 @@ class TimerController < ApplicationController
 
   def index
     responses = ['Voor je kijken, doorcoden!!!', 'We zijn nog slimme applicaties aan het bouwen...', 'Writersblock...']
-    time_check = Chronic.parse('today 4pm')
+    time_check = Chronic.parse('today 12pm')
     @now      = Time.new
 
 
     if @now.hour >= time_check.hour
-      time_check = Chronic.parse('tomorrow 4pm')
+      time_check = Chronic.parse('tomorrow 12pm')
     end
 
     @time   = false
